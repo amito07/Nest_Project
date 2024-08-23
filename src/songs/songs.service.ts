@@ -10,7 +10,15 @@ export class SongsService {
 
     getOneSong(id: number) {
         console.log("number", id)
-        return this.songs[id];
+        if (id > 0){
+            throw new Error("No songs found")
+        }
+        const data: any = {
+            id: id,
+            info: this.songs[id]
+
+        }
+        return data;
     }
 
     createSong(song: string) {
