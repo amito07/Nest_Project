@@ -5,6 +5,7 @@ import { SongsModule } from './songs/songs.module';
 import { PracticeModule } from './practice/practice.module';
 import { LoggerMiddleware } from './common/middleware/middleware.middleware';
 import { SongsController } from './songs/songs.controller';
+import { logger } from './common/middleware/logger.middleware';
 
 @Module({
   imports: [SongsModule, PracticeModule],
@@ -13,6 +14,7 @@ import { SongsController } from './songs/songs.controller';
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
+    consumer.apply(logger).forRoutes('practice')
     // consumer.apply(LoggerMiddleware).forRoutes('songs'); //option 1
     // consumer.apply(LoggerMiddleware).forRoutes({path: 'songs', method: RequestMethod.POST}); //option 2
     // consumer.apply(LoggerMiddleware).forRoutes(SongsController); //option 3
